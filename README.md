@@ -5,7 +5,7 @@ A small module that uses LuaJIT's FFI to bypass the arbitrary restrictions on [l
 
 ### About
 
-[PhysFS](https://icculus.org/physfs/docs/html/index.html) is the underlying C library that powers [love.filesystem](https://love2d.org/wiki/love.filesystem). It offers some file-system features that Lua's standard `io` library does not, such as: listing all files & folders in a directory, and creating new directories (in a cross-platform way).
+[PhysFS](https://icculus.org/physfs/docs/html/index.html) is the underlying C library that powers [love.filesystem](https://love2d.org/wiki/love.filesystem). It offers some filesystem features that Lua's standard `io` library does not, such as: listing all files & folders in a directory, and creating new directories (in a cross-platform way).
 
 Unfortunately, Löve hamstrings these features by restricting their use to only a [few possible locations](https://love2d.org/wiki/love.filesystem):
 * The "save directory" (such as: C:\\Users\\bob\\AppData\\Roaming...).
@@ -32,13 +32,13 @@ local urfs = require "urfs"
 
 ### Functions
 
-#### urfs.mount(archive, mountPoint, [appendToPath])
-Add a directory or archive to the list of search paths for reading files.
+#### urfs.mount(archive, [mountPoint], [appendToPath])
+Add a directory or archive (.zip) to the list of search paths for reading files. This means the files and folders inside of `archive` will be accessible to the "reading" functions from love.filesystem, such as [love.filesystem.getInfo](https://love2d.org/wiki/love.filesystem.getInfo), [love.filesystem.getDirectoryItems](https://love2d.org/wiki/love.filesystem.getDirectoryItems), and [love.fileSystem.getRealDirectory](https://love2d.org/wiki/love.fileSystem.getRealDirectory), among others. They will also be accessible to the asset loading functions like [love.graphics.newImage](https://love2d.org/wiki/love.graphics.newImage) and so on.
 
 _PARAMETERS:_
 * **`archive`** - <kbd>string</kbd> - The path of the directory or archive to mount.
-* **`mountPoint`** - <kbd>string</kbd> - The virtual path that `archive` will be mounted to. This can overlap existing virtual paths and can be an empty string.
-* **`appendToPath`** - <kbd>string</kbd> - _Optional_ - Whether `archive` should be searched before or after already-mounted archives when reading files. By default (`appendToPath = nil` or `false`) previously-mounted files will be read if paths overlap. Pass in `true` to have the files from `archive` be prioritized first.
+* **`mountPoint`** - <kbd>string</kbd> - _Optional_ - The virtual path that `archive` will be mounted to. This can overlap existing virtual paths. The default of `nil` (equivalent to an empty string) will add the files from `archive` to the root of the virtual filesystem.
+* **`appendToPath`** - <kbd>string</kbd> - _Optional_ - Whether `archive` should be searched before or after already-mounted archives when reading files. By default (`appendToPath = nil` or `false`) previously-mounted files will be accessed if paths overlap. Pass in `true` to have the new files from `archive` be prioritized first.
 
 _RETURNS:_
 * **`isSuccess`** - <kbd>bool</kbd> - `true` if `archive` was mounted successfully, false if not.
