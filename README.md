@@ -38,7 +38,7 @@ Add a directory or archive (.zip) to the list of search paths for reading files.
 _PARAMETERS:_
 * **`archive`** - <kbd>string</kbd> - The path of the directory or archive to mount.
 * **`mountPoint`** - <kbd>string</kbd> - _Optional_ - The virtual path that `archive` will be mounted to. This can overlap existing virtual paths. The default of `nil` (equivalent to an empty string) will add the files from `archive` to the root of the virtual filesystem.
-* **`appendToPath`** - <kbd>string</kbd> - _Optional_ - Whether `archive` should be searched before or after already-mounted archives when reading files. By default (`appendToPath = nil` or `false`) previously-mounted files will be accessed if paths overlap. Pass in `true` to have the new files from `archive` be prioritized first.
+* **`appendToPath`** - <kbd>string</kbd> - _Optional_ - Pass in `true` if `archive` should be searched *after* already-mounted archives when reading files. By default the archive path is prepended, meaning newly-mounted files will be accessed if paths overlap.
 
 _RETURNS:_
 * **`isSuccess`** - <kbd>bool</kbd> - `true` if `archive` was mounted successfully, false if not.

@@ -22,7 +22,7 @@ local function getLastErrorMessage()
 end
 
 function M.mount(archive, mountPoint, appendToPath)
-	if C.PHYSFS_mount(archive, mountPoint, appendToPath and 0 or 1) == 0 then
+	if C.PHYSFS_mount(archive, mountPoint, appendToPath and 1 or 0) == 0 then
 		return false, getLastErrorMessage()
 	end
 	return true
