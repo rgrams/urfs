@@ -58,6 +58,15 @@ _RETURNS:_
 
 See: [PHYSFS_unmount](https://icculus.org/physfs/docs/html/physfs_8h.html#aab0e2ba90aa918b2ee1ed7c40293b442) for more info.
 
+#### urfs.getMountPoint(archive)
+Get the mount point used to mount an archive path, or `nil` if it's not mounted. PhysFS does not allow you to mount the same archive to multiple mount points; subsequent calls to urfs.mount() will do nothing (and give no error) and the archive will stay mounted at its first mount point.
+
+_PAREMETERS_
+* **`archive`** - <kbd>string</kbd> - The `archive` path parameter previously passed to `urfs.mount`.
+
+_RETURNS:_
+* **`mountPoint`** - <kbd>string | nil</kbd> - The last `mountPoint` of `archive`, or `nil` if it is not mounted. Returns an empty string if `archive` was mounted without specifying a mount point.
+
 #### urfs.setWriteDir(dir)
 PhysFS (and love.filesystem) always has a _single_ directory that is used to write files and directories. This function lets you change that directory. This affects all love.filesystem functions that modify or create files and directories, such as: [love.filesystem.createDirectory](https://love2d.org/wiki/love.filesystem.createDirectory), [love.filesystem.newFile](https://love2d.org/wiki/love.filesystem.newFile), and [love.filesystem.write](https://love2d.org/wiki/love.filesystem.write). By default, Löve sets the write dir to the save directory.
 
