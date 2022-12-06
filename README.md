@@ -1,7 +1,7 @@
 
 ## UnRestricted FileSystem - For LÖVE
 
-A small module that uses LuaJIT's FFI to bypass the arbitrary restrictions on [love.filesystem](https://love2d.org/wiki/love.filesystem) so you can read and write files and folders anywhere.
+A small module that uses LuaJIT's FFI to bypass the restrictions on [love.filesystem](https://love2d.org/wiki/love.filesystem) so you can read and write files and folders anywhere.
 
 ### About
 
@@ -17,7 +17,7 @@ Also Löve  _only_ ever allows _write_ access to the save directory.
 
 Usually this is fine, if you're making a normal, small game, but if you want to make any kind of editor or tool, custom file dialogs, add certain modding capabilities, or anything else that would require greater filesystem access, then you are out of luck.
 
-"URFS" uses the FFI to call PhysFS functions directly, bypassing Löve's added restrictions so you can do what you want.
+"URFS" uses LuaJIT's FFI to call PhysFS functions directly, bypassing Löve's added restrictions so you can do what you want.
 
 Since PhysFS is already included in Löve, you don't need to add any .dlls or .sos or install anything else on your system. Everything in love.filesystem will work without modification; URFS only gives alternatives to the functions that are restricted (mount & unmount) or nonexistent (get/setWriteDir) to give the love.filesystem functions access to other directories.
 
